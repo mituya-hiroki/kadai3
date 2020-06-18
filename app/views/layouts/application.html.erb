@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header style="background-color:black;">
+      <div class = "container">
+        <div class = "row">
+          <div class = "col-xs-4">
+            <span style="color:white;">Bookers</span>
+          </div>
+          <div class = "col-xs-8">
+            <% if user_signed_in? %>
+            
+            <ul class = "nav navbar-nav navbar-right">
+              <li>
+              <%= link_to user_path(current_user.id) do %>
+              <span class="glyphicon glyphicon-home" aria-hidden="true" style="color:white;"></span>
+              <span style="color:white;">Home</span>
+              <% end %>
+              </li>
+              <li>
+              <%= link_to users_path do %>
+              <span class="glyphicon glyphicon-user" aria-hidden="true" style="color:white;"></span>
+              <span style="color:white;"> Users </span>
+              <% end %>
+              </li>
+              <li>
+              <%= link_to books_path do %>
+              <span class="glyphicon glyphicon-book" aria-hidden="true" style="color:white;"></span>
+              <span style="color:white;"> Books </span>
+              <% end %>
+              </li> 
+              <li>
+              <%= link_to destroy_user_session_path,method: :delete  do %>
+              <span class="glyphicon glyphicon-log-out" aria-hidden="true" style="color:white;"></span>
+              <span style="color:white;"> logout </span>
+              <% end %>
+              </li>
+            </ul>
+     <% else %>
+        <ul class = "nav navbar-nav navbar-right">
+          <li>
+            <%= link_to root_path do %>
+            <span class="glyphicon glyphicon-home" aria-hidden="true" style="color:white;"></span>
+              <span style="color:white;">Home</span>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to about_home_path do %>
+            <span class="glyphicon glyphicon-link" aria-hidden="true" style="color:white;"></span>
+            <span style="color:white;"> About </span>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to new_user_registration_path do %>
+            <span class="glyphicon glyphicon-edit" aria-hidden="true" style="color:white;"></span>
+            <span style="color:white;"> sign up </span>
+            <% end %>
+          </li>        
+          <li>
+            <%= link_to new_user_session_path do %>
+            <span class="glyphicon glyphicon-log-in" aria-hidden="true" style="color:white;"></span>
+            <span style="color:white;"> login </span>
+            <% end %>
+          </li>
+        </ul>      
+      <% end %>  
+          </div>
+        </div>    
+      </div>
+    </header> 
+    <% if flash[:notice] %>
+      <p><%= flash[:notice] %></p>
+    <% end %>
+     <%= yield %>
+  </body>
+</html>
